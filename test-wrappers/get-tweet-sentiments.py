@@ -4,6 +4,7 @@ Parse a list of tweets, extract the text
 '''
 import json
 import java.util.Arrays
+import java.util.ArrayList
 
 def input(payload):
 	tweets=json.loads(str(payload))
@@ -19,8 +20,10 @@ def input(payload):
 	return result
 
 def output(payload):
-	floats = [float(x) for x in payload.replace('[','').replace(']','').split()]
-	return java.util.Arrays.asList(floats)
+	if (payload):
+		floats = [float(x) for x in payload.replace('[','').replace(']','').split()]
+		return list=java.util.ArrayList(java.util.Arrays.asList(floats))
+	return None	
 
 if __name__ == '__main__':
 	with open('./list-of-tweets.txt', 'r') as tweets:
