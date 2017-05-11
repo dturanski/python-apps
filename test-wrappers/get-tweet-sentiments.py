@@ -24,4 +24,3 @@ if __name__ == '__main__':
 	channel='input'	
 	
 result=locals()[channel](payload)
-print(result)
