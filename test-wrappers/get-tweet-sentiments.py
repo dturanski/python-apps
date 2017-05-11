@@ -3,7 +3,7 @@
 Parse a list of tweets, extract the text
 '''
 import json
-import java
+import java.util.Arrays
 
 def input(payload):
 	tweets=json.loads(str(payload))
