@@ -5,7 +5,7 @@ Parse a list of tweets, extract the text
 import json
 
 def input(payload):
-	tweets=json.loads(payload)
+	tweets=json.loads(str(payload))
 	text = []
 	
 	for tweet in tweets:
