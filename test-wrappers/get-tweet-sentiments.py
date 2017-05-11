@@ -24,5 +24,5 @@ if __name__ == '__main__':
 	with open('./list-of-tweets.txt', 'r') as tweets:
 		payload=tweets.read().replace('\n', '')
 	channel='input'	
-	
+headers['Content-Type']='application/json'	
 result=locals()[channel](payload)
