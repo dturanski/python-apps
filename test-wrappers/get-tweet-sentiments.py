@@ -22,7 +22,7 @@ def input(payload):
 def output(payload):
 	if (payload):
 		floats = [float(x) for x in payload.replace('[','').replace(']','').split()]
-		return list=java.util.ArrayList(java.util.Arrays.asList(floats))
+		return java.util.ArrayList(java.util.Arrays.asList(floats))
 	return None	
 
 if __name__ == '__main__':
