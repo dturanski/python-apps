@@ -1,8 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env jython
 '''
 Parse a list of tweets, extract the text
 '''
 import json
+import java
 
 def input(payload):
 	tweets=json.loads(str(payload))
@@ -18,7 +19,8 @@ def input(payload):
 	return result
 
 def output(payload):
-	return payload	
+	floats = [float(x) for x in payload.replace('[','').replace(']','').split()]
+	return java.util.Arrays.asList(floats)
 
 if __name__ == '__main__':
 	with open('./list-of-tweets.txt', 'r') as tweets:
