@@ -13,7 +13,9 @@ def input(payload):
 			val = tweet['text'].encode('ascii','ignore')
 			text.append(val)
 
-	return json.JSONEncoder().encode({"data": text })
+	result = json.JSONEncoder().encode({"data": text })
+	print(result)
+	return result
 
 def output(payload):
 	return payload	
