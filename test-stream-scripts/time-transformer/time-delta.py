@@ -3,11 +3,11 @@ from springcloudstream.stream import Processor
 __author__ = 'David Turanski'
 
 #06/01/16 09:45:11
-def echo(data):
+def time_delta(data):
 	format = '%m/%d/%y %H:%M:%S'
 	delta = datetime.now() - datetime.strptime(data,format)
 	return str(delta)
 
 
 process = Processor()
-process.start(echo)
+process.start(time_delta)
