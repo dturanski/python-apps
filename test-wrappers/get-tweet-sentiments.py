@@ -28,5 +28,6 @@ def output(payload):
 if __name__ == '__main__':
 	with open('./list-of-tweets.txt', 'r') as tweets:
 		payload=tweets.read().replace('\n', '')
-	channel='input'	
+	channel='input'
+
 result=locals()[channel](payload)
