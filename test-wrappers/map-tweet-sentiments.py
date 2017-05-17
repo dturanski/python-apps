@@ -26,7 +26,5 @@ if __name__ == "__main__":
 
     payload = sys.stdin.readline()
 
-result = label_sentiment_score(payload)
-
-if __name__ == "__main__":
-    print(result)
+tmp = label_sentiment_score(payload)
+result = tmp
