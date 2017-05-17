@@ -7,6 +7,7 @@ def label_sentiment_score(payload):
     doc = json.loads(payload)
     score = float(doc['polarity'])
 
+    sentiment='Gloomy'
     for (k, v) in sorted(sentiments.items(), key=lambda item: (item[1], item[0])):
         if score > v:
             sentiment = k
