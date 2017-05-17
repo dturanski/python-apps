@@ -11,6 +11,7 @@ def label_sentiment_score(payload):
     for (k, v) in sorted(sentiments.items(), key=lambda item: (item[1], item[0])):
         if score > v:
             sentiment = k
+    print("polarity:%f sentiment:%s" % (score, sentiment))        
     return json.dumps({'sentiment': sentiment})
 
 
