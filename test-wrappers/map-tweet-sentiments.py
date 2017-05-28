@@ -12,11 +12,10 @@ if __name__ == "__main__":
     gloomy = '0.25'
     doomed = '0.00'
 
-    import sys
-
     payload = HashMap()
     payload.put('text','RT USERNAME: Pleased to confirm this story. We filed today in Delhi High Court. Had enough of his campaign of calumny. URL')
     payload.put('polarity', 0.4102732628007269641027326280072696)
+
 
 #
 # Processor script
@@ -29,8 +28,12 @@ def label_sentiment_score(payload):
     try:
         score = float(payload['polarity'])
     except:
-        print("Error parsing: %s " % str(payload))
-        return {'sentiment' : 'unknown'}
+        try:
+            print("Error parsing polarity: %s " % payload['polarity'])
+        except:
+            pass
+
+        return json.dumps({'sentiment' : 'unknown'})
 
     sentiment='Gloomy'
     for (k, v) in sorted(sentiments.items(), key=lambda x: x[1]):
