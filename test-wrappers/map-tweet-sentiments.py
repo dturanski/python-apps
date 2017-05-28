@@ -28,12 +28,8 @@ def label_sentiment_score(payload):
     try:
         score = float(payload['polarity'])
     except:
-        try:
-            print("Error parsing polarity: %s " % payload['polarity'])
-        except:
-            pass
-
-        return json.dumps({'sentiment' : 'unknown'})
+        print("Error parsing polarity: %s %s " % (payload['polarity'], type(payload['polarity'])))
+        return json.dumps({'sentiment' : 'Unknown'})
 
     sentiment='Gloomy'
     for (k, v) in sorted(sentiments.items(), key=lambda x: x[1]):
