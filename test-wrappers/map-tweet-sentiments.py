@@ -1,9 +1,11 @@
 import json
+from java.math import BigDecimal
 #
 # For testing, the module is not __main__ at runtime
 #
 if __name__ == "__main__":
     from java.util import HashMap
+    from java.math import BigDecimal
     ecstatic = '.90'
     happy = '.75'
     warm = '.65'
@@ -14,7 +16,7 @@ if __name__ == "__main__":
 
     payload = HashMap()
     payload.put('text','RT USERNAME: Pleased to confirm this story. We filed today in Delhi High Court. Had enough of his campaign of calumny. URL')
-    payload.put('polarity', 0.4102732628007269641027326280072696)
+    payload.put('polarity', BigDecimal(0.4102732628007269641027326280072696))
 
 
 #
@@ -25,11 +27,12 @@ sentiments = dict(
 
 
 def label_sentiment_score(payload):
-    try:
-        score = float(payload['polarity'])
-    except:
-        print("Error parsing polarity: %s %s " % (payload['polarity'], type(payload['polarity'])))
-        return json.dumps({'sentiment' : 'Unknown'})
+
+    score = payload['polarity']
+
+    if type(score) == BigDecimal :
+        print(type(score))
+        score = score.floatValue()
 
     sentiment='Gloomy'
     for (k, v) in sorted(sentiments.items(), key=lambda x: x[1]):
@@ -38,3 +41,4 @@ def label_sentiment_score(payload):
     return json.dumps({'sentiment': sentiment})
 
 result = label_sentiment_score(payload)
+print result
