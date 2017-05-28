@@ -41,4 +41,3 @@ def label_sentiment_score(payload):
     return json.dumps({'sentiment': sentiment})
 
 result = label_sentiment_score(payload)
-print result
