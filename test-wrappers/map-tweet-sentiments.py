@@ -31,7 +31,6 @@ def label_sentiment_score(payload):
     score = payload['polarity']
 
     if type(score) == BigDecimal :
-        print(type(score))
         score = score.floatValue()
 
     sentiment='Gloomy'
