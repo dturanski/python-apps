@@ -1,11 +1,12 @@
 import json
-from java.math import BigDecimal
 #
 # For testing, the module is not __main__ at runtime
 #
 if __name__ == "__main__":
-    from java.util import HashMap
-    from java.math import BigDecimal
+
+    def new_item(text, polarity):
+        return json.dumps({'text':text,'polarity':polarity})
+
     ecstatic = '.90'
     happy = '.75'
     warm = '.65'
@@ -14,29 +15,40 @@ if __name__ == "__main__":
     gloomy = '0.25'
     doomed = '0.00'
 
-    payload = HashMap()
-    payload.put('text','RT USERNAME: Pleased to confirm this story. We filed today in Delhi High Court. Had enough of his campaign of calumny. URL')
-    payload.put('polarity', BigDecimal(0.4102732628007269641027326280072696))
 
+    items = []
+    items.append(new_item('some text',0.4102732628007269641027326280072696))
+    items.append(new_item('some text', 0.2102732628007269641027326280072696))
+    items.append(new_item('some text', 0))
+    items.append(new_item('some text', 0.6102732628007269641027326280072696))
+    items.append(new_item('some text', 0.9102732628007269641027326280072696))
+    items.append(new_item('some text', 0.75))
 
 #
 # Processor script
 #
-sentiments = dict(
-    (name.title(), float(eval(name))) for name in ['ecstatic', 'happy', 'warm', 'meh', 'cool', 'gloomy', 'doomed'])
 
 
 def label_sentiment_score(payload):
+    sentiments = dict(
+        (name.title(), float(eval(name))) for name in ['ecstatic', 'happy', 'warm', 'meh', 'cool', 'gloomy', 'doomed'])
+    sentiments = sorted(sentiments.items(), key=lambda x: x[1])
 
-    score = payload['polarity']
+    data = json.loads(payload)
 
-    if type(score) == BigDecimal :
-        score = score.floatValue()
+    score = data.get('polarity',-1)
+
+    if score < 0:
+        return json.dumps({'sentiment' : 'Unknown'})
 
     sentiment='Gloomy'
-    for (k, v) in sorted(sentiments.items(), key=lambda x: x[1]):
-        if score > v:
+    for (k, v) in sentiments:
+        if score >= v:
             sentiment = k
     return json.dumps({'sentiment': sentiment})
 
-result = label_sentiment_score(payload)
+if __name__ == "__main__":
+    for item in items:
+        print(label_sentiment_score(item))
+else:
+    result = label_sentiment_score(payload)
