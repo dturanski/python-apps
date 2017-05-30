@@ -15,6 +15,8 @@ parser.add_option("-c", "--categories", type="string",
 
 options, arguments = parser.parse_args()
 
+print(options.categories)
+
 categories = eval(options.categories)
 
 sentiments = {k.title(): float(v) for k, v in categories.items()}
