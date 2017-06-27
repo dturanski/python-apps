@@ -38,4 +38,4 @@ def label_sentiment_score(payload):
     return json.dumps({'sentiment': sentiment})
 
 
-Processor().start(label_sentiment_score)
+Processor(label_sentiment_score,sys.argv).start()
